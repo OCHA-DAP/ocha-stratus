@@ -1,0 +1,90 @@
+#########################
+# Project Configuration #
+#########################
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ocha-stratus"
+description = "Utilities for accessing data from Azure cloud storage"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+    { name = "Hannah Ker", email = "hannah.ker@un.org" },
+    { name = "Tristan Downing", email = "tristan.downing@un.org" }
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "geopandas==1.0.1",
+    "pandas==2.2.2",
+    "rioxarray==0.17.0",
+    "xarray==2024.7.0",
+    "azure-storage-blob==12.22.0",
+    "sqlalchemy==2.0.36",
+    "psycopg2-binary==2.9.10",
+    "pyarrow==17.0.0",
+    "dask==2024.8.0",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "ruff==0.9.6",
+    "pre-commit==3.8.0",
+    "python-dotenv==1.0.1"
+]
+
+[project.urls]
+Homepage = "https://github.com/OCHA-DAP/ocha-stratus"  # Update with your repo
+Repository = "https://github.com/OCHA-DAP/ocha-stratus.git"
+"Bug Tracker" = "https://github.com/OCHA-DAP/ocha-stratus/issues"
+
+
+#########
+# Hatch #
+#########
+
+# Build
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ocha-stratus"]
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/ocha-stratus/_version.py"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+# Versioning
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+version_scheme = "python-simplified-semver"
+
+# Static code analysis
+
+[tool.hatch.envs.hatch-static-analysis]
+dependencies = ["ruff==0.9.6"]
+
+[tool.hatch.envs.hatch-static-analysis.scripts]
+format-check = ["ruff format --config ruff.toml --check --diff {args:.}",]
+format-fix = ["ruff format --config ruff.toml {args:.}",]
+lint-check = ["ruff check --config ruff.toml {args:.}",]
+lint-fix = ["ruff check --config ruff.toml --fix {args:.}",]
