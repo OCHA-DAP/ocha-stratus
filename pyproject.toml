@@ -10,7 +10,7 @@ build-backend = "hatchling.build"
 name = "ocha-stratus"
 description = "Utilities for accessing data from Azure cloud storage"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.8" # TODO: Confirm what the minimum python version is
 license = { text = "MIT" }
 authors = [
     { name = "Hannah Ker", email = "hannah.ker@un.org" },
@@ -55,10 +55,20 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/OCHA-DAP/ocha-stratus"  # Update with your repo
+Homepage = "https://github.com/OCHA-DAP/ocha-stratus"
 Repository = "https://github.com/OCHA-DAP/ocha-stratus.git"
 "Bug Tracker" = "https://github.com/OCHA-DAP/ocha-stratus/issues"
 
+#########
+# Tests #
+#########
+
+[tool.pytest.ini_options]
+minversion = "6.0"          # Requires pytest version 6.0 or higher
+addopts = "-ra"          # Default command line options for pytest
+testpaths = [               # Directories to look for tests
+    "tests",
+]
 
 #########
 # Hatch #

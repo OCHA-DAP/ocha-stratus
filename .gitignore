@@ -49,3 +49,5 @@ docs/api/generated/
 
 */.DS_Store
 .DS_Store
+
+.vscode/*
