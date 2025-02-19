@@ -2,12 +2,18 @@
 #    uv pip compile pyproject.toml --resolver=backtracking --all-extras -o requirements.txt
 affine==2.4.0
     # via rasterio
+alabaster==1.0.0
+    # via sphinx
 attrs==25.1.0
     # via rasterio
 azure-core==1.32.0
     # via azure-storage-blob
 azure-storage-blob==12.22.0
     # via ocha-stratus (pyproject.toml)
+babel==2.17.0
+    # via sphinx
+beautifulsoup4==4.13.3
+    # via furo
 certifi==2025.1.31
     # via
     #   pyogrio
@@ -38,27 +44,50 @@ dask==2024.8.0
     # via ocha-stratus (pyproject.toml)
 distlib==0.3.9
     # via virtualenv
+docutils==0.21.2
+    # via
+    #   myst-parser
+    #   sphinx
 filelock==3.17.0
     # via virtualenv
 fsspec==2025.2.0
     # via dask
+furo==2024.8.6
+    # via ocha-stratus (pyproject.toml)
 geopandas==1.0.1
     # via ocha-stratus (pyproject.toml)
 identify==2.6.7
     # via pre-commit
 idna==3.10
     # via requests
+imagesize==1.4.1
+    # via sphinx
 isodate==0.7.2
     # via azure-storage-blob
+jinja2==3.1.5
+    # via
+    #   myst-parser
+    #   sphinx
 locket==1.0.0
     # via partd
+markdown-it-py==3.0.0
+    # via
+    #   mdit-py-plugins
+    #   myst-parser
+markupsafe==3.0.2
+    # via jinja2
+mdit-py-plugins==0.4.2
+    # via myst-parser
+mdurl==0.1.2
+    # via markdown-it-py
+myst-parser==4.0.1
+    # via ocha-stratus (pyproject.toml)
 nodeenv==1.9.1
     # via pre-commit
 numpy==2.2.3
     # via
     #   geopandas
     #   pandas
-    #   pyarrow
     #   pyogrio
     #   rasterio
     #   rioxarray
@@ -70,6 +99,7 @@ packaging==24.2
     #   geopandas
     #   pyogrio
     #   rioxarray
+    #   sphinx
     #   xarray
 pandas==2.2.2
     # via
@@ -84,10 +114,14 @@ pre-commit==3.8.0
     # via ocha-stratus (pyproject.toml)
 psycopg2-binary==2.9.10
     # via ocha-stratus (pyproject.toml)
-pyarrow==17.0.0
+pyarrow==19.0.0
     # via ocha-stratus (pyproject.toml)
 pycparser==2.22
     # via cffi
+pygments==2.19.1
+    # via
+    #   furo
+    #   sphinx
 pyogrio==0.10.0
     # via geopandas
 pyparsing==3.2.1
@@ -105,13 +139,18 @@ pytz==2025.1
 pyyaml==6.0.2
     # via
     #   dask
+    #   myst-parser
     #   pre-commit
 rasterio==1.4.3
     # via rioxarray
 requests==2.32.3
-    # via azure-core
+    # via
+    #   azure-core
+    #   sphinx
 rioxarray==0.17.0
     # via ocha-stratus (pyproject.toml)
+roman-numerals-py==3.0.0
+    # via sphinx
 ruff==0.9.6
     # via ocha-stratus (pyproject.toml)
 shapely==2.0.7
@@ -120,6 +159,33 @@ six==1.17.0
     # via
     #   azure-core
     #   python-dateutil
+snowballstemmer==2.2.0
+    # via sphinx
+soupsieve==2.6
+    # via beautifulsoup4
+sphinx==8.2.0
+    # via
+    #   ocha-stratus (pyproject.toml)
+    #   furo
+    #   myst-parser
+    #   sphinx-basic-ng
+    #   sphinx-copybutton
+sphinx-basic-ng==1.0.0b2
+    # via furo
+sphinx-copybutton==0.5.2
+    # via ocha-stratus (pyproject.toml)
+sphinxcontrib-applehelp==2.0.0
+    # via sphinx
+sphinxcontrib-devhelp==2.0.0
+    # via sphinx
+sphinxcontrib-htmlhelp==2.1.0
+    # via sphinx
+sphinxcontrib-jsmath==1.0.1
+    # via sphinx
+sphinxcontrib-qthelp==2.0.0
+    # via sphinx
+sphinxcontrib-serializinghtml==2.0.0
+    # via sphinx
 sqlalchemy==2.0.36
     # via ocha-stratus (pyproject.toml)
 toolz==1.0.0
@@ -130,6 +196,7 @@ typing-extensions==4.12.2
     # via
     #   azure-core
     #   azure-storage-blob
+    #   beautifulsoup4
     #   sqlalchemy
 tzdata==2025.1
     # via pandas

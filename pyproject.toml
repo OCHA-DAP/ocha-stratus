@@ -36,8 +36,9 @@ dependencies = [
     "azure-storage-blob==12.22.0",
     "sqlalchemy==2.0.36",
     "psycopg2-binary==2.9.10",
-    "pyarrow==17.0.0",
+    "pyarrow==19.0.0",
     "dask==2024.8.0",
+    "python-dotenv==1.0.1"
 ]
 dynamic = ["version"]
 
@@ -45,7 +46,12 @@ dynamic = ["version"]
 dev = [
     "ruff==0.9.6",
     "pre-commit==3.8.0",
-    "python-dotenv==1.0.1"
+]
+docs = [
+    "sphinx>=7.1.0",
+    "sphinx-copybutton>=0.5.0",
+    "furo>=2024.1.29",
+    "myst-parser>=2.0.0",
 ]
 
 [project.urls]
@@ -61,10 +67,10 @@ Repository = "https://github.com/OCHA-DAP/ocha-stratus.git"
 # Build
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/ocha-stratus"]
+packages = ["src/ocha_stratus"]
 
 [tool.hatch.build.hooks.vcs]
-version-file = "src/ocha-stratus/_version.py"
+version-file = "src/ocha_stratus/_version.py"
 
 [tool.hatch.metadata]
 allow-direct-references = true

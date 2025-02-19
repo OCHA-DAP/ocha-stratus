@@ -41,3 +41,11 @@ var/
 
 # setuptools_scm
 _version.py
+
+# Sphinx documentation
+docs/_build/
+docs/_autosummary/
+docs/api/generated/
+
+*/.DS_Store
+.DS_Store
