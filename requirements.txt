@@ -62,6 +62,8 @@ idna==3.10
     # via requests
 imagesize==1.4.1
     # via sphinx
+iniconfig==2.0.0
+    # via pytest
 isodate==0.7.2
     # via azure-storage-blob
 jinja2==3.1.5
@@ -98,6 +100,7 @@ packaging==24.2
     #   dask
     #   geopandas
     #   pyogrio
+    #   pytest
     #   rioxarray
     #   sphinx
     #   xarray
@@ -110,6 +113,8 @@ partd==1.4.2
     # via dask
 platformdirs==4.3.6
     # via virtualenv
+pluggy==1.5.0
+    # via pytest
 pre-commit==3.8.0
     # via ocha-stratus (pyproject.toml)
 psycopg2-binary==2.9.10
@@ -130,6 +135,8 @@ pyproj==3.7.1
     # via
     #   geopandas
     #   rioxarray
+pytest==8.3.4
+    # via ocha-stratus (pyproject.toml)
 python-dateutil==2.9.0.post0
     # via pandas
 python-dotenv==1.0.1
