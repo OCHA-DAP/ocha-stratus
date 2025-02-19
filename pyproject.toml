@@ -29,7 +29,7 @@ classifiers = [
 
 dependencies = [
     "geopandas==1.0.1",
-    "pandas==2.2.2",
+    "pandas==2.2.3",
     "rioxarray==0.17.0",
     "xarray==2024.7.0",
     "azure-storage-blob==12.22.0",

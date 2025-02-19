@@ -104,7 +104,7 @@ packaging==24.2
     #   rioxarray
     #   sphinx
     #   xarray
-pandas==2.2.2
+pandas==2.2.3
     # via
     #   ocha-stratus (pyproject.toml)
     #   geopandas
