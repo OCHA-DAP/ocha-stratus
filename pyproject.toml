@@ -10,7 +10,7 @@ build-backend = "hatchling.build"
 name = "ocha-stratus"
 description = "Utilities for accessing data from Azure cloud storage"
 readme = "README.md"
-requires-python = ">=3.8" # TODO: Confirm what the minimum python version is
+requires-python = ">=3.10" # TODO: Confirm what the minimum python version is
 license = { text = "MIT" }
 authors = [
     { name = "Hannah Ker", email = "hannah.ker@un.org" },
@@ -21,8 +21,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",

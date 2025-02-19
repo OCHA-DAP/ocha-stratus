@@ -49,7 +49,7 @@ DSCI_AZ_DB_PROD_UID=your_prod_db_uid
 
 ## Dependencies
 
-ocha-stratus requires Python 3.8 or later and depends on:
+ocha-stratus requires Python 3.10 or later and depends on:
 
 - pandas
 - geopandas
