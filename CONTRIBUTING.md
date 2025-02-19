@@ -46,7 +46,7 @@ DSCI_AZ_DB_PROD_UID=<provided-on-request>
 DSCI_AZ_DB_PROD_HOST=<provided-on-request>
 ```
 
-## Packages
+## Dependencies
 
 [pip-tools](https://github.com/jazzband/pip-tools) is used for
 package management.  If you’ve introduced a new package to the
@@ -62,3 +62,15 @@ Any changes to the dependencies will be automatically reflected in
 the file without committing by executing:
 
     pre-commit run pip-compile --all-files
+
+## Documentation
+
+Documentation
+Documentation is built using Sphinx with MyST for Markdown support. Build the docs locally:
+
+```bash
+cd docs
+sphinx-build -b html . _build/html
+```
+
+View the built documentation by opening `docs/_build/html/index.html` in your browser.
