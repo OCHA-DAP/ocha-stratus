@@ -27,25 +27,6 @@ To check if your changes pass pre-commit without committing, run:
 
     pre-commit run --all-files
 
-## Environment Variables
-
-This project uses `python-dotenv` for local secrets management. To access the required cloud resources,
-create a local `.env` file with the following keys:
-
-```
-# stage='dev'
-DSCI_AZ_BLOB_DEV_SAS=<provided-on-request>
-DSCI_AZ_DB_DEV_PW=<provided-on-request>
-DSCI_AZ_DB_DEV_UID=<provided-on-request>
-DSCI_AZ_DB_DEV_HOST=<provided-on-request>
-
-# stage='prod'
-DSCI_AZ_BLOB_PROD_SAS=<provided-on-request>
-DSCI_AZ_DB_PROD_PW=<provided-on-request>
-DSCI_AZ_DB_PROD_UID=<provided-on-request>
-DSCI_AZ_DB_PROD_HOST=<provided-on-request>
-```
-
 ## Dependencies
 
 [pip-tools](https://github.com/jazzband/pip-tools) is used for

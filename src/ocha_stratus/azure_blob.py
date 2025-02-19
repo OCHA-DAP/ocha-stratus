@@ -17,6 +17,9 @@ load_dotenv()
 PROD_BLOB_SAS = os.getenv("DSCI_AZ_BLOB_PROD_SAS")
 DEV_BLOB_SAS = os.getenv("DSCI_AZ_BLOB_DEV_SAS")
 
+PROD_BLOB_SAS_WRITE = os.getenv("DSCI_AZ_BLOB_PROD_SAS_WRITE")
+DEV_BLOB_SAS_WRITE = os.getenv("DSCI_AZ_BLOB_DEV_SAS_WRITE")
+
 DS_AZ_BLOB_DEV_HOST = "imb0chd0dev.blob.core.windows.net"
 DS_AZ_BLOB_PROD_HOST = "imb0chd0prod.blob.core.windows.net"
 
@@ -24,7 +27,9 @@ AZURE_BLOB_BASE_URL = "https://{host}/{container_name}?{sas}"
 
 
 def get_container_client(
-    container_name: str = "projects", stage: Literal["prod", "dev"] = "dev"
+    container_name: str = "projects",
+    stage: Literal["prod", "dev"] = "dev",
+    write: bool = False,
 ):
     """
     Get an Azure Blob Storage container client.
@@ -35,6 +40,8 @@ def get_container_client(
         Name of the container to connect to, by default "projects"
     stage : Literal["prod", "dev"], optional
         Environment stage to connect to, by default "dev"
+    write : bool, optional
+        Whether write access is required
 
     Returns
     -------
@@ -42,16 +49,18 @@ def get_container_client(
         Azure storage container client object
     """
     if stage == "dev":
+        sas_token = DEV_BLOB_SAS_WRITE if write else DEV_BLOB_SAS
         url = AZURE_BLOB_BASE_URL.format(
             host=DS_AZ_BLOB_DEV_HOST,
             container_name=container_name,
-            sas=DEV_BLOB_SAS,
+            sas=sas_token,
         )
     elif stage == "prod":
+        sas_token = PROD_BLOB_SAS_WRITE if write else PROD_BLOB_SAS
         url = AZURE_BLOB_BASE_URL.format(
             host=DS_AZ_BLOB_PROD_HOST,
             container_name=container_name,
-            sas=PROD_BLOB_SAS,
+            sas=sas_token,
         )
     else:
         raise ValueError(f"Invalid stage: {stage}")

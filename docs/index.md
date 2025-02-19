@@ -59,12 +59,22 @@ The package requires several environment variables to be set in a `.env` file:
 # Development Environment
 DSCI_AZ_BLOB_DEV_SAS=your_dev_sas_token
 DSCI_AZ_DB_DEV_PW=your_dev_db_password
-DSCI_AZ_DB_DEV_HOST=your_dev_db_host
 DSCI_AZ_DB_DEV_UID=your_dev_db_uid
+
+DSCI_AZ_BLOB_DEV_SAS_WRITE=your_dev_sas_token_w_write_permissions
+DSCI_AZ_DB_DEV_PW_WRITE=your_dev_db_password_w_write_permissions
+DSCI_AZ_DB_DEV_UID_WRITE=your_dev_db_uid_w_write_permissions
+
+DSCI_AZ_DB_DEV_HOST=your_dev_db_host
 
 # Production Environment
 DSCI_AZ_BLOB_PROD_SAS=your_prod_sas_token
 DSCI_AZ_DB_PROD_PW=your_prod_db_password
-DSCI_AZ_DB_PROD_HOST=your_prod_db_host
 DSCI_AZ_DB_PROD_UID=your_prod_db_uid
+
+DSCI_AZ_BLOB_PROD_SAS_WRITE=your_prod_sas_token_w_write_permissions
+DSCI_AZ_DB_PROD_PW_WRITE=your_prod_db_password_w_write_permissions
+DSCI_AZ_DB_PROD_UID_WRITE=your_prod_db_uid_w_write_permissions
+
+DSCI_AZ_DB_PROD_HOST=your_prod_db_host
 ```

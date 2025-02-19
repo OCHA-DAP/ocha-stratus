@@ -9,16 +9,22 @@ load_dotenv()
 AZURE_DB_PW_DEV = os.getenv("DSCI_AZ_DB_DEV_PW")
 AZURE_DB_PW_PROD = os.getenv("DSCI_AZ_DB_PROD_PW")
 
+AZURE_DB_PW_DEV_WRITE = os.getenv("DSCI_AZ_DB_DEV_PW_WRITE")
+AZURE_DB_PW_PROD_WRITE = os.getenv("DSCI_AZ_DB_PROD_PW_WRITE")
+
 DS_AZ_DB_DEV_HOST = os.getenv("DSCI_AZ_DB_DEV_HOST")
 DS_AZ_DB_PROD_HOST = os.getenv("DSCI_AZ_DB_PROD_HOST")
 
 AZURE_DB_UID_PROD = os.getenv("DSCI_AZ_DB_PROD_UID")
 AZURE_DB_UID_DEV = os.getenv("DSCI_AZ_DB_DEV_UID")
 
+AZURE_DB_UID_PROD_WRITE = os.getenv("DSCI_AZ_DB_PROD_UID_WRITE")
+AZURE_DB_UID_DEV_WRITE = os.getenv("DSCI_AZ_DB_DEV_UID_WRITE")
+
 AZURE_DB_BASE_URL = "postgresql+psycopg2://{uid}:{pw}@{host}/postgres"
 
 
-def get_engine(stage: Literal["dev", "prod"] = "dev"):
+def get_engine(stage: Literal["dev", "prod"] = "dev", write: bool = False):
     """
     Create a SQLAlchemy engine for connecting to Azure SQL Database.
 
@@ -26,6 +32,8 @@ def get_engine(stage: Literal["dev", "prod"] = "dev"):
     ----------
     stage : Literal["dev", "prod"], optional
         Environment stage to connect to, by default "dev"
+    write : bool, optional
+        Whether write access is required
 
     Returns
     -------
@@ -38,15 +46,29 @@ def get_engine(stage: Literal["dev", "prod"] = "dev"):
         If the provided stage is neither "dev" nor "prod"
     """
     if stage == "dev":
+        if write:
+            uid = AZURE_DB_UID_DEV_WRITE
+            pw = AZURE_DB_PW_DEV_WRITE
+        else:
+            uid = AZURE_DB_UID_DEV
+            pw = AZURE_DB_PW_DEV
+
         url = AZURE_DB_BASE_URL.format(
-            uid=AZURE_DB_UID_DEV,
-            pw=AZURE_DB_PW_DEV,
+            uid=uid,
+            pw=pw,
             host=DS_AZ_DB_DEV_HOST,
         )
     elif stage == "prod":
+        if write:
+            uid = AZURE_DB_UID_PROD_WRITE
+            pw = AZURE_DB_PW_PROD_WRITE
+        else:
+            uid = AZURE_DB_UID_DEV
+            pw = AZURE_DB_PW_DEV
+
         url = AZURE_DB_BASE_URL.format(
-            uid=AZURE_DB_UID_PROD,
-            pw=AZURE_DB_PW_PROD,
+            uid=uid,
+            pw=pw,
             host=DS_AZ_DB_PROD_HOST,
         )
     else:
