@@ -10,7 +10,7 @@ api
 
 ## Overview
 
-ocha-stratus is a Python package for working with cloud storage and databases, primarily focused on Azure services. It provides utilities for:
+ocha-stratus is a Python package developed by the [Data Science team](https://centre.humdata.org/data-science/) at the [Centre for Humanitarian Data](https://centre.humdata.org/) for basic data access and storage operations against internally-managed Azure cloud infrastructure. It provides utilities for:
 
 - Reading and writing various data formats to Azure Blob Storage:
   - Parquet files
