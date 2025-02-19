@@ -63,8 +63,8 @@ def get_engine(stage: Literal["dev", "prod"] = "dev", write: bool = False):
             uid = AZURE_DB_UID_PROD_WRITE
             pw = AZURE_DB_PW_PROD_WRITE
         else:
-            uid = AZURE_DB_UID_DEV
-            pw = AZURE_DB_PW_DEV
+            uid = AZURE_DB_UID_PROD
+            pw = AZURE_DB_PW_PROD
 
         url = AZURE_DB_BASE_URL.format(
             uid=uid,
