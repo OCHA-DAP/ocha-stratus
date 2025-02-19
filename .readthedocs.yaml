@@ -15,3 +15,13 @@ python:
       path: .
       extra_requirements:
         - docs
+
+# Versions for documentation
+formats:
+  - pdf
+  - epub
+
+# Version settings
+submodules:
+  include: all
+  recursive: true
