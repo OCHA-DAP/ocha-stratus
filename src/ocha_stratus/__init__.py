@@ -10,7 +10,7 @@ from ocha_stratus.azure_blob import (
     upload_parquet_to_blob,
     upload_shp_to_blob,
 )
-from ocha_stratus.database import get_engine, postgres_upsert
+from ocha_stratus.azure_database import get_engine, postgres_upsert
 
 from ._version import version as __version__  # noqa: F401
 
