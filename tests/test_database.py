@@ -8,7 +8,7 @@ from sqlalchemy.engine import Engine
 @pytest.fixture
 def mock_engine():
     """Create a mock SQLAlchemy engine."""
-    with patch("ocha_stratus.database.create_engine") as mock:
+    with patch("ocha_stratus.azure_database.create_engine") as mock:
         engine = MagicMock(spec=Engine)
         mock.return_value = engine
         yield engine
@@ -30,9 +30,9 @@ def test_get_engine_dev():
     """Test getting a dev database engine."""
     with patch("dotenv.load_dotenv"):
         # Import get_engine inside the test to avoid early environment loading
-        from ocha_stratus.database import get_engine
+        from ocha_stratus.azure_database import get_engine
 
-        with patch("ocha_stratus.database.create_engine") as mock:
+        with patch("ocha_stratus.azure_database.create_engine") as mock:
             get_engine(stage="dev")
             mock.assert_called_once()
             url = mock.call_args[0][0]
@@ -45,9 +45,9 @@ def test_get_engine_dev():
 def test_get_engine_prod():
     """Test getting a prod database engine."""
     with patch("dotenv.load_dotenv"):
-        from ocha_stratus.database import get_engine
+        from ocha_stratus.azure_database import get_engine
 
-        with patch("ocha_stratus.database.create_engine") as mock:
+        with patch("ocha_stratus.azure_database.create_engine") as mock:
             get_engine(stage="prod")
             mock.assert_called_once()
             url = mock.call_args[0][0]
@@ -60,7 +60,7 @@ def test_get_engine_prod():
 def test_get_engine_invalid_stage():
     """Test getting an engine with invalid stage."""
     with patch("dotenv.load_dotenv"):
-        from ocha_stratus.database import get_engine
+        from ocha_stratus.azure_database import get_engine
 
         with pytest.raises(ValueError):
             get_engine(stage="invalid")

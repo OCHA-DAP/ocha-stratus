@@ -12,6 +12,7 @@ In your virtual environment, please install all packages for
 development by running:
 
     pip install -r requirements.txt
+    pip install -e ".[dev]"
 
 ## Pre-Commit
 
