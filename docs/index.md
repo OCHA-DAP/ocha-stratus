@@ -1,0 +1,80 @@
+# ocha-stratus Documentation
+
+```{toctree}
+:maxdepth: 2
+:caption: Contents
+
+installation
+api
+```
+
+## Overview
+
+ocha-stratus is a Python package developed by the [Data Science team](https://centre.humdata.org/data-science/) at the [Centre for Humanitarian Data](https://centre.humdata.org/) for basic data access and storage operations against internally-managed Azure cloud infrastructure. It provides utilities for:
+
+- Reading and writing various data formats to Azure Blob Storage:
+  - Parquet files
+  - CSV files
+  - Shapefiles
+  - Cloud Optimized GeoTIFFs (COGs)
+- Managing Azure PostgreSQL database connections and operations
+- Supporting development and production environments
+
+## Quick Start
+
+Install the package:
+```bash
+pip install ocha-stratus
+```
+
+### Azure Blob Storage
+
+```python
+from ocha_stratus import upload_csv_to_blob, load_csv_from_blob
+
+# Upload a pandas DataFrame as CSV
+upload_csv_to_blob(df, "data.csv", stage="dev")
+
+# Load it back
+df = load_csv_from_blob("data.csv", stage="dev")
+```
+
+### Azure PostgreSQL Database
+
+```python
+from ocha_stratus import get_engine, postgres_upsert
+
+# Get database connection
+engine = get_engine(stage="dev")
+
+# Perform upsert operation
+postgres_upsert(table, conn, keys, data_iter)
+```
+
+## Environment Configuration
+
+The package requires several environment variables to be set in a `.env` file:
+
+```bash
+# Development Environment
+DSCI_AZ_BLOB_DEV_SAS=your_dev_sas_token
+DSCI_AZ_DB_DEV_PW=your_dev_db_password
+DSCI_AZ_DB_DEV_UID=your_dev_db_uid
+
+DSCI_AZ_BLOB_DEV_SAS_WRITE=your_dev_sas_token_w_write_permissions
+DSCI_AZ_DB_DEV_PW_WRITE=your_dev_db_password_w_write_permissions
+DSCI_AZ_DB_DEV_UID_WRITE=your_dev_db_uid_w_write_permissions
+
+DSCI_AZ_DB_DEV_HOST=your_dev_db_host
+
+# Production Environment
+DSCI_AZ_BLOB_PROD_SAS=your_prod_sas_token
+DSCI_AZ_DB_PROD_PW=your_prod_db_password
+DSCI_AZ_DB_PROD_UID=your_prod_db_uid
+
+DSCI_AZ_BLOB_PROD_SAS_WRITE=your_prod_sas_token_w_write_permissions
+DSCI_AZ_DB_PROD_PW_WRITE=your_prod_db_password_w_write_permissions
+DSCI_AZ_DB_PROD_UID_WRITE=your_prod_db_uid_w_write_permissions
+
+DSCI_AZ_DB_PROD_HOST=your_prod_db_host
+```
