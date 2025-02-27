@@ -308,7 +308,7 @@ def _upload_blob_data(
         MIME type of the content, by default None
     """
     container_client = get_container_client(
-        stage=stage, container_name=container_name
+        stage=stage, container_name=container_name, write=True
     )
 
     if content_type is None:
@@ -445,5 +445,5 @@ def upload_cog_to_blob(
         da.rio.to_raster(temp_filename, driver="COG")
         with open(temp_filename, "rb") as f:
             get_container_client(
-                container_name=container_name, stage=stage
+                container_name=container_name, stage=stage, write=True
             ).get_blob_client(blob_name).upload_blob(f, overwrite=True)
