@@ -2,7 +2,8 @@ import os
 from typing import Literal
 
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, insert
+from sqlalchemy import create_engine
+from sqlalchemy.dialects.postgresql import insert
 
 load_dotenv()
 
