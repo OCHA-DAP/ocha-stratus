@@ -189,7 +189,12 @@ def load_csv_from_blob(
     return pd.read_csv(io.BytesIO(blob_data), **kwargs)
 
 
-def upload_shp_to_blob(gdf, blob_name, stage: Literal["prod", "dev"] = "dev"):
+def upload_shp_to_blob(
+    gdf,
+    blob_name,
+    stage: Literal["prod", "dev"] = "dev",
+    container_name: str = "projects",
+):
     """
     Upload a GeoDataFrame to Azure Blob Storage as a zipped shapefile.
 
@@ -201,6 +206,8 @@ def upload_shp_to_blob(gdf, blob_name, stage: Literal["prod", "dev"] = "dev"):
         Name of the blob to create/update
     stage : Literal["prod", "dev"], optional
         Environment stage to upload to, by default "dev"
+    container_name : str, optional
+        Name of the container to upload to, by default "projects"
     """
     with tempfile.TemporaryDirectory() as temp_dir:
         # File paths for shapefile components within the temp directory
@@ -219,12 +226,17 @@ def upload_shp_to_blob(gdf, blob_name, stage: Literal["prod", "dev"] = "dev"):
 
         # Upload the buffer content as a blob
         with open(full_zip_path, "rb") as data:
-            _upload_blob_data(data, blob_name, stage=stage)
+            _upload_blob_data(
+                data, blob_name, stage=stage, container_name=container_name
+            )
 
 
 # TODO: Allow for specification of local directory
 def load_shp_from_blob(
-    blob_name, shapefile: str = None, stage: Literal["prod", "dev"] = "dev"
+    blob_name,
+    shapefile: str = None,
+    stage: Literal["prod", "dev"] = "dev",
+    container_name: str = "projects",
 ):
     """
     Load a zipped shapefile from Azure Blob Storage into a GeoDataFrame.
@@ -237,13 +249,17 @@ def load_shp_from_blob(
         Name of the specific shapefile within the zip to load, by default None
     stage : Literal["prod", "dev"], optional
         Environment stage to load from, by default "dev"
+    container_name : str, optional
+        Name of the container to load from, by default "projects"
 
     Returns
     -------
     geopandas.GeoDataFrame
         GeoDataFrame containing the loaded spatial data
     """
-    blob_data = _load_blob_data(blob_name, stage=stage)
+    blob_data = _load_blob_data(
+        blob_name, stage=stage, container_name=container_name
+    )
     with zipfile.ZipFile(io.BytesIO(blob_data), "r") as zip_ref:
         zip_ref.extractall("temp")
         if shapefile is None:
