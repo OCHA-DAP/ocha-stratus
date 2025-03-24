@@ -40,7 +40,7 @@ cloudpickle==3.1.1
     # via dask
 cryptography==44.0.2
     # via azure-storage-blob
-dask==2024.8.0
+dask==2025.3.0
     # via ocha-stratus (pyproject.toml)
 distlib==0.3.9
     # via virtualenv
@@ -68,6 +68,7 @@ isodate==0.7.2
     # via azure-storage-blob
 jinja2==3.1.6
     # via
+    #   ocha-stratus (pyproject.toml)
     #   myst-parser
     #   sphinx
 locket==1.0.0
