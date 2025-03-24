@@ -8,7 +8,7 @@ attrs==25.3.0
     # via rasterio
 azure-core==1.32.0
     # via azure-storage-blob
-azure-storage-blob==12.22.0
+azure-storage-blob==12.25.0
     # via ocha-stratus (pyproject.toml)
 babel==2.17.0
     # via sphinx
@@ -116,11 +116,11 @@ platformdirs==4.3.7
     # via virtualenv
 pluggy==1.5.0
     # via pytest
-pre-commit==3.8.0
+pre-commit==4.2.0
     # via ocha-stratus (pyproject.toml)
 psycopg2-binary==2.9.10
     # via ocha-stratus (pyproject.toml)
-pyarrow==19.0.0
+pyarrow==19.0.1
     # via ocha-stratus (pyproject.toml)
 pycparser==2.22
     # via cffi
@@ -155,11 +155,11 @@ requests==2.32.3
     # via
     #   azure-core
     #   sphinx
-rioxarray==0.17.0
+rioxarray==0.18.2
     # via ocha-stratus (pyproject.toml)
 roman-numerals-py==3.1.0
     # via sphinx
-ruff==0.9.6
+ruff==0.11.2
     # via ocha-stratus (pyproject.toml)
 shapely==2.0.7
     # via geopandas
@@ -194,7 +194,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.36
+sqlalchemy==2.0.39
     # via ocha-stratus (pyproject.toml)
 toolz==1.0.0
     # via
@@ -212,7 +212,7 @@ urllib3==2.3.0
     # via requests
 virtualenv==20.29.3
     # via pre-commit
-xarray==2024.7.0
+xarray==2025.3.0
     # via
     #   ocha-stratus (pyproject.toml)
     #   rioxarray
