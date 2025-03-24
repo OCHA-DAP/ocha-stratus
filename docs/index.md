@@ -53,7 +53,7 @@ postgres_upsert(table, conn, keys, data_iter)
 
 ## Environment Configuration
 
-The package requires several environment variables to be set in a `.env` file:
+This package depends on the following environment variables:
 
 ```bash
 # Development Environment

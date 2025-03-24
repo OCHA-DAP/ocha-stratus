@@ -10,9 +10,6 @@ import pandas as pd
 import rioxarray as rxr
 import xarray as xr
 from azure.storage.blob import ContainerClient, ContentSettings
-from dotenv import load_dotenv
-
-load_dotenv()
 
 PROD_BLOB_SAS = os.getenv("DSCI_AZ_BLOB_PROD_SAS")
 DEV_BLOB_SAS = os.getenv("DSCI_AZ_BLOB_DEV_SAS")

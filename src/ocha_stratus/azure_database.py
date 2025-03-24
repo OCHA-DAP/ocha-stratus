@@ -1,11 +1,8 @@
 import os
 from typing import Literal
 
-from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.dialects.postgresql import insert
-
-load_dotenv()
 
 AZURE_DB_PW_DEV = os.getenv("DSCI_AZ_DB_DEV_PW")
 AZURE_DB_PW_PROD = os.getenv("DSCI_AZ_DB_PROD_PW")
