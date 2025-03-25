@@ -1,7 +1,7 @@
 # ocha-stratus Documentation
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 3
 :caption: Contents
 
 installation
@@ -30,25 +30,25 @@ pip install ocha-stratus
 ### Azure Blob Storage
 
 ```python
-from ocha_stratus import upload_csv_to_blob, load_csv_from_blob
+import ocha_stratus as stratus
 
 # Upload a pandas DataFrame as CSV
-upload_csv_to_blob(df, "data.csv", stage="dev")
+stratus.upload_csv_to_blob(df, "data.csv", stage="dev")
 
 # Load it back
-df = load_csv_from_blob("data.csv", stage="dev")
+df = stratus.load_csv_from_blob("data.csv", stage="dev")
 ```
 
 ### Azure PostgreSQL Database
 
 ```python
-from ocha_stratus import get_engine, postgres_upsert
+import ocha_stratus as stratus
 
 # Get database connection
-engine = get_engine(stage="dev")
+engine = stratus.get_engine(stage="dev")
 
 # Perform upsert operation
-postgres_upsert(table, conn, keys, data_iter)
+stratus.postgres_upsert(table, conn, keys, data_iter)
 ```
 
 ## Environment Configuration
