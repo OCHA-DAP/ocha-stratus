@@ -1,5 +1,3 @@
-from unittest.mock import patch
-
 import pytest
 
 
@@ -21,7 +19,3 @@ def mock_env_vars(monkeypatch):
     # Use monkeypatch instead of directly modifying os.environ
     for key, value in env_vars.items():
         monkeypatch.setenv(key, value)
-
-    # Mock dotenv.load_dotenv to do nothing
-    with patch("dotenv.load_dotenv"):
-        yield

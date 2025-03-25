@@ -31,7 +31,7 @@ pip install -e ".[dev]"
 
 ## Environment Configuration
 
-Create a `.env` file in your project root:
+This package depends on the following environment variables:
 
 ```bash
 # Development Environment
