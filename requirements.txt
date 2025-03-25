@@ -130,7 +130,7 @@ pygments==2.19.1
     #   sphinx
 pyogrio==0.10.0
     # via geopandas
-pyparsing==3.2.2
+pyparsing==3.2.3
     # via rasterio
 pyproj==3.7.1
     # via
@@ -140,9 +140,9 @@ pytest==8.3.5
     # via ocha-stratus (pyproject.toml)
 python-dateutil==2.9.0.post0
     # via pandas
-python-dotenv==1.0.1
+python-dotenv==1.1.0
     # via ocha-stratus (pyproject.toml)
-pytz==2025.1
+pytz==2025.2
     # via pandas
 pyyaml==6.0.2
     # via
