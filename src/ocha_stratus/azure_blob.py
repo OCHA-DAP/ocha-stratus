@@ -87,7 +87,7 @@ def upload_parquet_to_blob(
     **kwargs : dict
         Additional arguments passed to pandas.DataFrame.to_parquet()
     """
-    _upload_blob_data(
+    upload_blob_data(
         df.to_parquet(**kwargs),
         blob_name,
         stage=stage,
@@ -117,7 +117,7 @@ def load_parquet_from_blob(
     pandas.DataFrame
         DataFrame containing the loaded data
     """
-    blob_data = _load_blob_data(
+    blob_data = load_blob_data(
         blob_name, stage=stage, container_name=container_name
     )
     return pd.read_parquet(io.BytesIO(blob_data))
@@ -146,7 +146,7 @@ def upload_csv_to_blob(
     **kwargs : dict
         Additional arguments passed to pandas.DataFrame.to_csv()
     """
-    _upload_blob_data(
+    upload_blob_data(
         df.to_csv(index=False, **kwargs),
         blob_name,
         stage=stage,
@@ -180,7 +180,7 @@ def load_csv_from_blob(
     pandas.DataFrame
         DataFrame containing the loaded data
     """
-    blob_data = _load_blob_data(
+    blob_data = load_blob_data(
         blob_name, stage=stage, container_name=container_name
     )
     return pd.read_csv(io.BytesIO(blob_data), **kwargs)
@@ -223,7 +223,7 @@ def upload_shp_to_blob(
 
         # Upload the buffer content as a blob
         with open(full_zip_path, "rb") as data:
-            _upload_blob_data(
+            upload_blob_data(
                 data, blob_name, stage=stage, container_name=container_name
             )
 
@@ -254,7 +254,7 @@ def load_shp_from_blob(
     geopandas.GeoDataFrame
         GeoDataFrame containing the loaded spatial data
     """
-    blob_data = _load_blob_data(
+    blob_data = load_blob_data(
         blob_name, stage=stage, container_name=container_name
     )
     with zipfile.ZipFile(io.BytesIO(blob_data), "r") as zip_ref:
@@ -267,7 +267,7 @@ def load_shp_from_blob(
     return gdf
 
 
-def _load_blob_data(
+def load_blob_data(
     blob_name,
     stage: Literal["prod", "dev"] = "dev",
     container_name: str = "projects",
@@ -297,7 +297,7 @@ def _load_blob_data(
     return data
 
 
-def _upload_blob_data(
+def upload_blob_data(
     data,
     blob_name,
     stage: Literal["prod", "dev"] = "dev",
