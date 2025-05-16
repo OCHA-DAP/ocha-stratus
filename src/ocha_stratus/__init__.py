@@ -1,10 +1,12 @@
 from ocha_stratus.azure_blob import (
     get_container_client,
     list_container_blobs,
+    load_blob_data,
     load_csv_from_blob,
     load_parquet_from_blob,
     load_shp_from_blob,
     open_blob_cog,
+    upload_blob_data,
     upload_cog_to_blob,
     upload_csv_to_blob,
     upload_parquet_to_blob,
@@ -26,6 +28,8 @@ __all__ = [
     "upload_cog_to_blob",
     "upload_parquet_to_blob",
     "upload_shp_to_blob",
+    "upload_blob_data",
+    "load_blob_data",
     # Database
     "get_engine",
     "postgres_upsert",
