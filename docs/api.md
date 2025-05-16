@@ -37,6 +37,12 @@ The `azure_blob` module provides utilities for working with Azure Blob Storage.
 .. autofunction:: ocha_stratus.open_blob_cog
 ```
 
+#### Generic data
+```{eval-rst}
+.. autofunction:: ocha_stratus.upload_blob_data
+.. autofunction:: ocha_stratus.load_blob_data
+```
+
 ## Database Operations
 
 The `database` module provides utilities for working with Azure PostgreSQL databases.
