@@ -3,7 +3,7 @@ import os
 import shutil
 import tempfile
 import zipfile
-from typing import Literal
+from typing import Literal, Optional
 
 import geopandas as gpd
 import pandas as pd
@@ -374,6 +374,7 @@ def _get_blob_url(
     blob_name,
     stage: Literal["prod", "dev"] = "dev",
     container_name: str = "projects",
+    container_client: Optional[ContainerClient] = None,
 ):
     """
     Get the URL for a blob in Azure Storage.
@@ -386,15 +387,18 @@ def _get_blob_url(
         Environment stage, by default "dev"
     container_name : str, optional
         Name of the container, by default "projects"
+    container_client: ContainerClient, optional
+        Azure ContainerClient in which the blob is located
 
     Returns
     -------
     str
         Complete URL to access the blob
     """
-    container_client = get_container_client(
-        stage=stage, container_name=container_name
-    )
+    if not container_client:
+        container_client = get_container_client(
+            stage=stage, container_name=container_name
+        )
     blob_client = container_client.get_blob_client(blob_name)
     return blob_client.url
 
@@ -404,6 +408,7 @@ def open_blob_cog(
     stage: Literal["prod", "dev"] = "dev",
     container_name: str = "projects",
     chunks=None,
+    container_client: Optional[ContainerClient] = None,
 ):
     """
     Open a Cloud Optimized GeoTIFF (COG) from Azure Blob Storage.
@@ -418,6 +423,8 @@ def open_blob_cog(
         Name of the container, by default "projects"
     chunks : bool or dict, optional
         Chunk size for dask array, by default None
+    container_client: ContainerClient, optional
+        Azure ContainerClient in which the blob is located
 
     Returns
     -------
@@ -425,7 +432,10 @@ def open_blob_cog(
         DataArray containing the raster data
     """
     cog_url = _get_blob_url(
-        blob_name, stage=stage, container_name=container_name
+        blob_name,
+        stage=stage,
+        container_name=container_name,
+        container_client=container_client,
     )
     if chunks is None:
         chunks = True
