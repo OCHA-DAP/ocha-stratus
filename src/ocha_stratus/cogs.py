@@ -1,8 +1,10 @@
 import logging
 import re
-from typing import List, Literal, Union
+from typing import List, Literal, Optional, Union
 
+import geopandas as gpd
 import pandas as pd
+import rioxarray  # noqa
 import tqdm
 import xarray as xr
 
@@ -27,6 +29,7 @@ def stack_cogs(
     dataset: str,
     dates: Union[List[str], List],
     stage: str = "prod",
+    clip_gdf: Optional[gpd.GeoDataFrame] = None,
     mode: Literal["interactive", "pipeline"] = "interactive",
 ) -> xr.Dataset:
     """
@@ -44,6 +47,10 @@ def stack_cogs(
         Collection of dates to filter COGs by. Should match 'YYYY-MM-DD' format.
         Will reference the issued date of the dataset (although for non-forecast
         datasets this is equivalent to the valid date).
+    clip_gdf : GeoDataFrame, optional
+        GeoPandas DataFrame containing geometries to clip the COGs to. If provided,
+        each COG will be clipped to the union of all geometries in the DataFrame
+        before stacking. The GeoDataFrame should be in the same CRS as the COGs.
     stage : str, optional
         Deployment stage for the container client, by default "prod".
         Determines which Azure storage environment to connect to.
@@ -57,7 +64,8 @@ def stack_cogs(
         Combined dataset with all COGs stacked along temporal dimensions.
         Contains 'date' dimension and optional 'leadtime' dimension if present
         in the source data. Attributes from individual COGs are dropped during
-        combination.
+        combination. If clip_gdf is provided, data will be clipped to the specified
+        geometries.
 
     Raises
     ------
@@ -79,6 +87,13 @@ def stack_cogs(
     """
 
     container = get_container_client("raster", stage=stage)
+
+    clip_geometry = None
+    if clip_gdf is not None:
+        # Union all geometries in the GeoDataFrame
+        clip_geometry = clip_gdf.geometry.unary_union
+        logger.info(f"Clipping enabled with {len(clip_gdf)} geometries")
+
     cogs_list = [
         x.name
         for x in container.list_blobs(name_starts_with=f"{dataset}/")
@@ -98,6 +113,9 @@ def stack_cogs(
         da_in = open_blob_cog(
             cog, container_name="raster", container_client=container
         )
+
+        if clip_geometry is not None:
+            da_in = da_in.rio.clip([clip_geometry], drop=True)
         date_suffix = (
             "valid" if da_in.attrs["month_issued"] == "None" else "issued"
         )
