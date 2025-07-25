@@ -13,6 +13,7 @@ from ocha_stratus.azure_blob import (
     upload_shp_to_blob,
 )
 from ocha_stratus.azure_database import get_engine, postgres_upsert
+from ocha_stratus.cogs import stack_cogs
 
 from ._version import version as __version__  # noqa: F401
 
@@ -33,4 +34,6 @@ __all__ = [
     # Database
     "get_engine",
     "postgres_upsert",
+    # Cogs
+    "stack_cogs",
 ]

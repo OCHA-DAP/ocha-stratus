@@ -6,15 +6,15 @@ alabaster==1.0.0
     # via sphinx
 attrs==25.3.0
     # via rasterio
-azure-core==1.32.0
+azure-core==1.35.0
     # via azure-storage-blob
-azure-storage-blob==12.25.0
+azure-storage-blob==12.25.1
     # via ocha-stratus (pyproject.toml)
 babel==2.17.0
     # via sphinx
-beautifulsoup4==4.13.3
+beautifulsoup4==4.13.4
     # via furo
-certifi==2025.1.31
+certifi==2025.6.15
     # via
     #   pyogrio
     #   pyproj
@@ -24,23 +24,23 @@ cffi==1.17.1
     # via cryptography
 cfgv==3.4.0
     # via pre-commit
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
     # via requests
-click==8.1.8
+click==8.2.1
     # via
     #   click-plugins
     #   cligj
     #   dask
     #   rasterio
-click-plugins==1.1.1
+click-plugins==1.1.1.2
     # via rasterio
 cligj==0.7.2
     # via rasterio
 cloudpickle==3.1.1
     # via dask
-cryptography==44.0.2
+cryptography==45.0.5
     # via azure-storage-blob
-dask==2025.3.0
+dask==2025.5.1
     # via ocha-stratus (pyproject.toml)
 distlib==0.3.9
     # via virtualenv
@@ -50,13 +50,13 @@ docutils==0.21.2
     #   sphinx
 filelock==3.18.0
     # via virtualenv
-fsspec==2025.3.0
+fsspec==2025.5.1
     # via dask
 furo==2024.8.6
     # via ocha-stratus (pyproject.toml)
-geopandas==1.0.1
+geopandas==1.1.1
     # via ocha-stratus (pyproject.toml)
-identify==2.6.9
+identify==2.6.12
     # via pre-commit
 idna==3.10
     # via requests
@@ -87,7 +87,7 @@ myst-parser==4.0.1
     # via ocha-stratus (pyproject.toml)
 nodeenv==1.9.1
     # via pre-commit
-numpy==2.2.4
+numpy==2.3.1
     # via
     #   geopandas
     #   pandas
@@ -96,7 +96,7 @@ numpy==2.2.4
     #   rioxarray
     #   shapely
     #   xarray
-packaging==24.2
+packaging==25.0
     # via
     #   dask
     #   geopandas
@@ -105,30 +105,31 @@ packaging==24.2
     #   rioxarray
     #   sphinx
     #   xarray
-pandas==2.2.3
+pandas==2.3.0
     # via
     #   ocha-stratus (pyproject.toml)
     #   geopandas
     #   xarray
 partd==1.4.2
     # via dask
-platformdirs==4.3.7
+platformdirs==4.3.8
     # via virtualenv
-pluggy==1.5.0
+pluggy==1.6.0
     # via pytest
 pre-commit==4.2.0
     # via ocha-stratus (pyproject.toml)
 psycopg2-binary==2.9.10
     # via ocha-stratus (pyproject.toml)
-pyarrow==19.0.1
+pyarrow==20.0.0
     # via ocha-stratus (pyproject.toml)
 pycparser==2.22
     # via cffi
-pygments==2.19.1
+pygments==2.19.2
     # via
     #   furo
+    #   pytest
     #   sphinx
-pyogrio==0.10.0
+pyogrio==0.11.0
     # via geopandas
 pyparsing==3.2.3
     # via rasterio
@@ -136,11 +137,11 @@ pyproj==3.7.1
     # via
     #   geopandas
     #   rioxarray
-pytest==8.3.5
+pytest==8.4.1
     # via ocha-stratus (pyproject.toml)
 python-dateutil==2.9.0.post0
     # via pandas
-python-dotenv==1.1.0
+python-dotenv==1.1.1
     # via ocha-stratus (pyproject.toml)
 pytz==2025.2
     # via pandas
@@ -151,25 +152,25 @@ pyyaml==6.0.2
     #   pre-commit
 rasterio==1.4.3
     # via rioxarray
-requests==2.32.3
+requests==2.32.4
     # via
     #   azure-core
     #   sphinx
-rioxarray==0.18.2
+rioxarray==0.19.0
     # via ocha-stratus (pyproject.toml)
 roman-numerals-py==3.1.0
     # via sphinx
-ruff==0.11.2
+ruff==0.12.2
     # via ocha-stratus (pyproject.toml)
-shapely==2.0.7
+shapely==2.1.1
     # via geopandas
 six==1.17.0
     # via
     #   azure-core
     #   python-dateutil
-snowballstemmer==2.2.0
+snowballstemmer==3.0.1
     # via sphinx
-soupsieve==2.6
+soupsieve==2.7
     # via beautifulsoup4
 sphinx==8.2.3
     # via
@@ -194,13 +195,15 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.39
+sqlalchemy==2.0.41
     # via ocha-stratus (pyproject.toml)
 toolz==1.0.0
     # via
     #   dask
     #   partd
-typing-extensions==4.12.2
+tqdm==4.67.1
+    # via ocha-stratus (pyproject.toml)
+typing-extensions==4.14.1
     # via
     #   azure-core
     #   azure-storage-blob
@@ -208,11 +211,11 @@ typing-extensions==4.12.2
     #   sqlalchemy
 tzdata==2025.2
     # via pandas
-urllib3==2.3.0
+urllib3==2.5.0
     # via requests
-virtualenv==20.29.3
+virtualenv==20.31.2
     # via pre-commit
-xarray==2025.3.0
+xarray==2025.7.0
     # via
     #   ocha-stratus (pyproject.toml)
     #   rioxarray

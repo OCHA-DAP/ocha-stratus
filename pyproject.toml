@@ -37,7 +37,8 @@ dependencies = [
     "psycopg2-binary>=2.9.10",
     "pyarrow>=17.0.0",
     "dask>2024.8.0",
-    "Jinja2>=3.1.6"
+    "Jinja2>=3.1.6",
+    "tqdm>=4.67.1"
 ]
 dynamic = ["version"]
 
