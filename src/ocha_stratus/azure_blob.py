@@ -258,12 +258,11 @@ def load_shp_from_blob(
         blob_name, stage=stage, container_name=container_name
     )
     with zipfile.ZipFile(io.BytesIO(blob_data), "r") as zip_ref:
-        zip_ref.extractall("temp")
-        if shapefile is None:
-            shapefile = [f for f in zip_ref.namelist() if f.endswith(".shp")][
-                0
-            ]
-        gdf = gpd.read_file(f"temp/{shapefile}")
+        with tempfile.TemporaryDirectory() as tmpdir:
+            zip_ref.extractall(tmpdir)
+            # Use os.path.join to get the full shapefile path
+            shapefile_path = os.path.join(tmpdir, shapefile)
+            gdf = gpd.read_file(shapefile_path)
     return gdf
 
 
