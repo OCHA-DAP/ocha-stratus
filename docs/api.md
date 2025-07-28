@@ -2,7 +2,7 @@
 
 ## Azure Blob Storage
 
-The `azure_blob` module provides utilities for working with Azure Blob Storage.
+Utilities for working with Azure Blob Storage.
 
 ### Container Operations
 
@@ -45,9 +45,17 @@ The `azure_blob` module provides utilities for working with Azure Blob Storage.
 
 ## Database Operations
 
-The `database` module provides utilities for working with Azure PostgreSQL databases.
+Utilities for working with Azure PostgreSQL databases.
 
 ```{eval-rst}
 .. autofunction:: ocha_stratus.get_engine
 .. autofunction:: ocha_stratus.postgres_upsert
+```
+
+## Cloud-Optimized GeoTIFF (COG) Operations
+
+Utilities for working with standard COG datasets.
+
+```{eval-rst}
+.. autofunction:: ocha_stratus.stack_cogs
 ```
