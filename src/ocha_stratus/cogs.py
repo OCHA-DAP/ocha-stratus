@@ -26,7 +26,7 @@ def _parse_date(filename):
 
 
 def stack_cogs(
-    dataset: str,
+    dataset: Literal["imerg", "seas5", "era5", "floodscan"],
     dates: Union[List[str], List],
     stage: str = "prod",
     clip_gdf: Optional[gpd.GeoDataFrame] = None,
@@ -41,7 +41,7 @@ def stack_cogs(
 
     Parameters
     ----------
-    dataset : str
+    dataset : {"imerg", "seas5", "era5", "floodscan"}
         Name of the dataset to retrieve COGs for. Used as prefix for blob name filtering.
     dates : List[str] or List
         Collection of dates to filter COGs by. Should match 'YYYY-MM-DD' format.

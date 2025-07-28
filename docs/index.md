@@ -51,6 +51,24 @@ engine = stratus.get_engine(stage="dev")
 stratus.postgres_upsert(table, conn, keys, data_iter)
 ```
 
+### COG Datasets
+
+```python
+import ocha_stratus as stratus
+import pandas as pd
+
+gdf = stratus.load_shp_from_blob(
+    "ds-aa-nga-flooding/raw/codab/nga.shp.zip",
+    shapefile="nga_adm0.shp",
+    stage="dev",
+)
+
+date_range = ["2024-01-01", "2024-02-01", "2024-03-01"]
+ds = stratus.stack_cogs("era5", date_range, "dev", clip_gdf=gdf)
+
+
+```
+
 ## Environment Configuration
 
 This package depends on the following environment variables:
