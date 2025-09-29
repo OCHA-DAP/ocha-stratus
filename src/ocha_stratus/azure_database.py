@@ -42,7 +42,7 @@ def get_engine(stage: Literal["dev", "prod"] = "dev", write: bool = False):
     AZURE_DB_UID_DEV_WRITE = os.getenv("DSCI_AZ_DB_DEV_UID_WRITE")
 
     AZURE_DB_BASE_URL = "postgresql+psycopg2://{uid}:{pw}@{host}/postgres"
-
+    print(DS_AZ_DB_PROD_HOST)
     if stage == "dev":
         if write:
             uid = AZURE_DB_UID_DEV_WRITE

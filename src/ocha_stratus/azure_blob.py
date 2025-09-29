@@ -44,7 +44,7 @@ def get_container_client(
     DS_AZ_BLOB_PROD_HOST = "imb0chd0prod.blob.core.windows.net"
 
     AZURE_BLOB_BASE_URL = "https://{host}/{container_name}?{sas}"
-
+    print(DS_AZ_BLOB_PROD_HOST)
     if stage == "dev":
         sas_token = DEV_BLOB_SAS_WRITE if write else DEV_BLOB_SAS
         url = AZURE_BLOB_BASE_URL.format(
