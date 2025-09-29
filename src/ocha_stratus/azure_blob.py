@@ -11,17 +11,6 @@ import rioxarray as rxr
 import xarray as xr
 from azure.storage.blob import ContainerClient, ContentSettings
 
-PROD_BLOB_SAS = os.getenv("DSCI_AZ_BLOB_PROD_SAS")
-DEV_BLOB_SAS = os.getenv("DSCI_AZ_BLOB_DEV_SAS")
-
-PROD_BLOB_SAS_WRITE = os.getenv("DSCI_AZ_BLOB_PROD_SAS_WRITE")
-DEV_BLOB_SAS_WRITE = os.getenv("DSCI_AZ_BLOB_DEV_SAS_WRITE")
-
-DS_AZ_BLOB_DEV_HOST = "imb0chd0dev.blob.core.windows.net"
-DS_AZ_BLOB_PROD_HOST = "imb0chd0prod.blob.core.windows.net"
-
-AZURE_BLOB_BASE_URL = "https://{host}/{container_name}?{sas}"
-
 
 def get_container_client(
     container_name: str = "projects",
@@ -45,6 +34,17 @@ def get_container_client(
     ContainerClient
         Azure storage container client object
     """
+    PROD_BLOB_SAS = os.getenv("DSCI_AZ_BLOB_PROD_SAS")
+    DEV_BLOB_SAS = os.getenv("DSCI_AZ_BLOB_DEV_SAS")
+
+    PROD_BLOB_SAS_WRITE = os.getenv("DSCI_AZ_BLOB_PROD_SAS_WRITE")
+    DEV_BLOB_SAS_WRITE = os.getenv("DSCI_AZ_BLOB_DEV_SAS_WRITE")
+
+    DS_AZ_BLOB_DEV_HOST = "imb0chd0dev.blob.core.windows.net"
+    DS_AZ_BLOB_PROD_HOST = "imb0chd0prod.blob.core.windows.net"
+
+    AZURE_BLOB_BASE_URL = "https://{host}/{container_name}?{sas}"
+
     if stage == "dev":
         sas_token = DEV_BLOB_SAS_WRITE if write else DEV_BLOB_SAS
         url = AZURE_BLOB_BASE_URL.format(
