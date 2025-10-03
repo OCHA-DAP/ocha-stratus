@@ -4,23 +4,6 @@ from typing import Literal
 from sqlalchemy import create_engine
 from sqlalchemy.dialects.postgresql import insert
 
-AZURE_DB_PW_DEV = os.getenv("DSCI_AZ_DB_DEV_PW")
-AZURE_DB_PW_PROD = os.getenv("DSCI_AZ_DB_PROD_PW")
-
-AZURE_DB_PW_DEV_WRITE = os.getenv("DSCI_AZ_DB_DEV_PW_WRITE")
-AZURE_DB_PW_PROD_WRITE = os.getenv("DSCI_AZ_DB_PROD_PW_WRITE")
-
-DS_AZ_DB_DEV_HOST = os.getenv("DSCI_AZ_DB_DEV_HOST")
-DS_AZ_DB_PROD_HOST = os.getenv("DSCI_AZ_DB_PROD_HOST")
-
-AZURE_DB_UID_PROD = os.getenv("DSCI_AZ_DB_PROD_UID")
-AZURE_DB_UID_DEV = os.getenv("DSCI_AZ_DB_DEV_UID")
-
-AZURE_DB_UID_PROD_WRITE = os.getenv("DSCI_AZ_DB_PROD_UID_WRITE")
-AZURE_DB_UID_DEV_WRITE = os.getenv("DSCI_AZ_DB_DEV_UID_WRITE")
-
-AZURE_DB_BASE_URL = "postgresql+psycopg2://{uid}:{pw}@{host}/postgres"
-
 
 def get_engine(stage: Literal["dev", "prod"] = "dev", write: bool = False):
     """
@@ -43,6 +26,22 @@ def get_engine(stage: Literal["dev", "prod"] = "dev", write: bool = False):
     ValueError
         If the provided stage is neither "dev" nor "prod"
     """
+    AZURE_DB_PW_DEV = os.getenv("DSCI_AZ_DB_DEV_PW")
+    AZURE_DB_PW_PROD = os.getenv("DSCI_AZ_DB_PROD_PW")
+
+    AZURE_DB_PW_DEV_WRITE = os.getenv("DSCI_AZ_DB_DEV_PW_WRITE")
+    AZURE_DB_PW_PROD_WRITE = os.getenv("DSCI_AZ_DB_PROD_PW_WRITE")
+
+    DS_AZ_DB_DEV_HOST = os.getenv("DSCI_AZ_DB_DEV_HOST")
+    DS_AZ_DB_PROD_HOST = os.getenv("DSCI_AZ_DB_PROD_HOST")
+
+    AZURE_DB_UID_PROD = os.getenv("DSCI_AZ_DB_PROD_UID")
+    AZURE_DB_UID_DEV = os.getenv("DSCI_AZ_DB_DEV_UID")
+
+    AZURE_DB_UID_PROD_WRITE = os.getenv("DSCI_AZ_DB_PROD_UID_WRITE")
+    AZURE_DB_UID_DEV_WRITE = os.getenv("DSCI_AZ_DB_DEV_UID_WRITE")
+
+    AZURE_DB_BASE_URL = "postgresql+psycopg2://{uid}:{pw}@{host}/postgres"
     if stage == "dev":
         if write:
             uid = AZURE_DB_UID_DEV_WRITE
