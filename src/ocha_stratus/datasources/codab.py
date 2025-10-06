@@ -9,6 +9,8 @@ GEOPARQUET_URLS = {
     0: "https://data.fieldmaps.io/adm0/osm/intl/adm0_polygons.parquet",
     1: "https://data.fieldmaps.io/edge-matched/humanitarian/intl/adm1_polygons.parquet",
     2: "https://data.fieldmaps.io/edge-matched/humanitarian/intl/adm2_polygons.parquet",
+    3: "https://data.fieldmaps.io/edge-matched/humanitarian/intl/adm3_polygons.parquet",
+    4: "https://data.fieldmaps.io/edge-matched/humanitarian/intl/adm4_polygons.parquet",
 }
 
 
@@ -26,7 +28,7 @@ def load_codab_from_fieldmaps(
     iso3 : str
         ISO 3166-1 alpha-3 country code
     admin_level : int, optional
-        Administrative level (0, 1, or 2), by default 0
+        Administrative level (0-4), by default 0
 
     Returns
     -------
