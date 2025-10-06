@@ -54,7 +54,7 @@ def load_codab_from_blob(
     iso3 : str
         ISO 3166-1 alpha-3 country code
     admin_level : int, optional
-        Administrative level (0, 1, or 2), by default 0
+        Administrative level (0-4), by default 0
     stage : Literal["dev", "prod"], optional
         Environment stage to load from, by default "prod"
 

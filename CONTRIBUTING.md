@@ -56,3 +56,11 @@ sphinx-build -b html . _build/html
 ```
 
 View the built documentation by opening `docs/_build/html/index.html` in your browser.
+
+
+You can also use `sphinx-autobuild` to automatically rebuild the docs on changes:
+
+```bash
+pip install sphinx-autobuild
+sphinx-autobuild docs docs/_build/html
+```
