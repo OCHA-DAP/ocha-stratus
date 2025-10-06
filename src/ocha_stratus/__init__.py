@@ -1,3 +1,4 @@
+from ocha_stratus import datasources as codab
 from ocha_stratus.azure_blob import (
     get_container_client,
     list_container_blobs,
@@ -36,4 +37,6 @@ __all__ = [
     "postgres_upsert",
     # Cogs
     "stack_cogs",
+    # Datasources
+    "codab",
 ]
