@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.abspath(".."))
 
 
 project = "ocha-stratus"
-copyright = "2024, OCHA"
+copyright = "2025, OCHA"
 author = "OCHA"
 
 extensions = [

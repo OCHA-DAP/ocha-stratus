@@ -51,16 +51,15 @@ engine = stratus.get_engine(stage="dev")
 stratus.postgres_upsert(table, conn, keys, data_iter)
 ```
 
-### COG Datasets
+### Load COGs and clip by a GeoDataFrame
 
 ```python
 import ocha_stratus as stratus
 import pandas as pd
 
-gdf = stratus.load_shp_from_blob(
-    "ds-aa-nga-flooding/raw/codab/nga.shp.zip",
-    shapefile="nga_adm0.shp",
-    stage="dev",
+gdf = stratus.load_codab_from_blob(
+  iso3="NGA,
+  admin_level=0
 )
 
 date_range = ["2024-01-01", "2024-02-01", "2024-03-01"]

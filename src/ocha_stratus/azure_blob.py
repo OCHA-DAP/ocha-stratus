@@ -236,6 +236,7 @@ def load_shp_from_blob(
 ):
     """
     Load a zipped shapefile from Azure Blob Storage into a GeoDataFrame.
+    Downloads the Shapefile locally to a temporary directory.
 
     Parameters
     ----------
