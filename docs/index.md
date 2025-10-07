@@ -1,4 +1,4 @@
-# ocha-stratus Documentation
+# ocha-stratus
 
 ```{toctree}
 :maxdepth: 3

@@ -25,6 +25,12 @@ html_theme = "furo"
 
 # Theme options
 html_theme_options = {
+    "light_css_variables": {
+        "color-brand-primary": "#007ce0",
+        "color-brand-content": "#007ce0",
+        "color-admonition-background": "orange",
+    },
+    "source_repository": "https://github.com/OCHA-DAP/ocha-stratus",
     "navigation_with_keys": True,
     "footer_icons": [
         {
@@ -38,12 +44,10 @@ html_theme_options = {
             "class": "",
         },
     ],
-    "light_css_variables": {
-        "color-sidebar-background": "#f8f9fb",
-    },
 }
 
 html_static_path = ["_static"]
+html_logo = "_static/ocha_logo.png"
 
 # Show version warning banner
 html_context = {
