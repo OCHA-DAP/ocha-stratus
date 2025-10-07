@@ -45,6 +45,7 @@ def load_codab_from_fieldmaps(
         url = GEOPARQUET_URLS[admin_level]
     except KeyError:
         logger.error(f"CODAB data for admin level {admin_level} not found")
+        return
     filters = [("iso_3", "=", iso3)]
     filesystem = HTTPFileSystem()
     gdf = gpd.read_parquet(url, filters=filters, filesystem=filesystem)
