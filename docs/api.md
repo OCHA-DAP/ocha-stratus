@@ -23,6 +23,7 @@ Utilities for working with Azure Blob Storage.
 ```{eval-rst}
 .. autofunction:: ocha_stratus.upload_parquet_to_blob
 .. autofunction:: ocha_stratus.load_parquet_from_blob
+.. autofunction:: ocha_stratus.load_geoparquet_from_blob
 ```
 
 #### Shapefiles
