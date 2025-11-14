@@ -122,6 +122,34 @@ def load_parquet_from_blob(
     return pd.read_parquet(io.BytesIO(blob_data))
 
 
+def load_geoparquet_from_blob(
+    blob_name: str,
+    stage: Literal["prod", "dev"] = "dev",
+    container_name: str = "projects",
+):
+    """
+    Load a GeoParquet file from Azure Blob Storage into a GeoDataFrame.
+
+    Parameters
+    ----------
+    blob_name : str
+        Name of the blob to load.
+    stage : Literal["prod", "dev"], optional
+        Environment stage, by default "dev".
+    container_name : str, optional
+        Name of the container, by default "projects".
+
+    Returns
+    -------
+    geopandas.GeoDataFrame
+        GeoDataFrame with geometry and CRS metadata preserved.
+    """
+    blob_data = load_blob_data(
+        blob_name, stage=stage, container_name=container_name
+    )
+    return gpd.read_parquet(io.BytesIO(blob_data))
+
+
 def upload_csv_to_blob(
     df,
     blob_name,
