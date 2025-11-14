@@ -1,9 +1,11 @@
 from unittest.mock import MagicMock, patch
 
+import geopandas as gpd
 import pandas as pd
 import pytest
 import xarray as xr
 from azure.storage.blob import ContainerClient
+from shapely.geometry import Point
 
 
 @pytest.fixture
@@ -25,6 +27,17 @@ def sample_dataframe():
 def sample_xarray():
     """Create a sample DataArray for testing."""
     return xr.DataArray([[1, 2], [3, 4]])
+
+
+@pytest.fixture
+def sample_geodataframe():
+    """Create a sample GeoDataFrame for testing."""
+    gdf = gpd.GeoDataFrame(
+        {"id": [1, 2, 3], "value": ["a", "b", "c"]},
+        geometry=[Point(0, 0), Point(1, 1), Point(2, 2)],
+        crs="EPSG:4326",
+    )
+    return gdf
 
 
 def test_get_container_client_read_dev():
@@ -93,6 +106,31 @@ def test_load_parquet_from_blob(mock_container_client, sample_dataframe):
     # Load data
     result = load_parquet_from_blob("test.parquet", stage="dev")
     pd.testing.assert_frame_equal(result, sample_dataframe)
+
+
+def test_load_geoparquet_from_blob(mock_container_client, sample_geodataframe):
+    """Test loading a GeoParquet file from blob storage."""
+    import io
+
+    from ocha_stratus.azure_blob import load_geoparquet_from_blob
+
+    # Create GeoParquet data
+    buffer = io.BytesIO()
+    sample_geodataframe.to_parquet(buffer)
+    geoparquet_data = buffer.getvalue()
+    mock_container_client.get_blob_client.return_value.download_blob.return_value.readall.return_value = geoparquet_data
+
+    # Load data
+    result = load_geoparquet_from_blob("test.parquet", stage="dev")
+
+    # Verify result is a GeoDataFrame
+    assert isinstance(result, gpd.GeoDataFrame)
+
+    # Verify CRS is preserved
+    assert result.crs == sample_geodataframe.crs
+
+    # Verify data is the same
+    pd.testing.assert_frame_equal(result, sample_geodataframe)
 
 
 def test_upload_csv_to_blob(mock_container_client, sample_dataframe):
