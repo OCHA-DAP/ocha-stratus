@@ -46,7 +46,7 @@ def load_cerf_from_blob(
     con = duckdb.connect()
     if iso3 is not None:
         df = con.execute(
-            f"SELECT * FROM read_parquet('{url}') WHERE iso3 = $1",
+            f"SELECT * FROM read_parquet('{url}') WHERE countryCode = $1",
             [iso3],
         ).df()
     else:
