@@ -69,3 +69,9 @@ Dataset-specific loading functions.
 ```{eval-rst}
 .. autofunction:: ocha_stratus.codab.load_codab_from_blob
 .. autofunction:: ocha_stratus.codab.load_codab_from_fieldmaps
+```
+
+### CERF funding allocations
+```{eval-rst}
+.. autofunction:: ocha_stratus.cerf.load_cerf_from_blob
+```

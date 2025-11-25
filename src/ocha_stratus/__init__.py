@@ -41,4 +41,5 @@ __all__ = [
     "stack_cogs",
     # Datasources
     "codab",
+    "cerf",
 ]
