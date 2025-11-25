@@ -1,4 +1,3 @@
-from ocha_stratus import datasources as codab
 from ocha_stratus.azure_blob import (
     get_container_client,
     list_container_blobs,
@@ -16,6 +15,7 @@ from ocha_stratus.azure_blob import (
 )
 from ocha_stratus.azure_database import get_engine, postgres_upsert
 from ocha_stratus.cogs import stack_cogs
+from ocha_stratus.datasources import codab, worldpop
 
 from ._version import version as __version__  # noqa: F401
 
@@ -41,4 +41,5 @@ __all__ = [
     "stack_cogs",
     # Datasources
     "codab",
+    "worldpop",
 ]

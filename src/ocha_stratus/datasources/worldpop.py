@@ -13,6 +13,7 @@ def load_worldpop_from_stac(
     year: int = 2025,
     resolution: str = "100m",
     product: str = "pop",
+    item_id: str | None = None,  # Allow exact item ID
     cache_dir: Path | str | None = None,
 ) -> xr.DataArray:
     """
@@ -28,8 +29,10 @@ def load_worldpop_from_stac(
         "100m" or "1km"
     product : str
         "pop" for total population, "agesex" for age/sex breakdown
+    item_id : str, optional
+        Exact STAC item ID. If provided, other filters are ignored.
     cache_dir : Path, optional
-        Directory to cache downloaded files. If None, uses a temp directory.
+        Directory to cache downloaded files.
 
     Returns
     -------
@@ -44,16 +47,27 @@ def load_worldpop_from_stac(
         }
     )
 
-    prefix = f"{iso3.lower()}_{product}_{year}"
-    matching = [
-        item
-        for item in search.items()
-        if item.id.startswith(prefix) and f"_{resolution}_" in item.id
-    ]
+    if item_id:
+        # Exact match
+        matching = [item for item in search.items() if item.id == item_id]
+    else:
+        prefix = f"{iso3.lower()}_{product}_{year}"
+        matching = [
+            item
+            for item in search.items()
+            if item.id.startswith(prefix) and f"_{resolution}_" in item.id
+        ]
 
     if not matching:
         raise ValueError(
             f"No data found for {iso3}, {product}, {year}, {resolution}"
+        )
+
+    if len(matching) > 1:
+        ids = [item.id for item in matching]
+        raise ValueError(
+            f"Multiple items found: {ids}. "
+            f"Pass item_id='...' to select one explicitly."
         )
 
     item = matching[0]
