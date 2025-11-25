@@ -8,19 +8,16 @@ from ..azure_blob import get_container_client
 
 logger = logging.getLogger(__name__)
 
-CERF_FNAME = "cerf/cerf_hdx_download.parquet"
+EMDAT_FNAME = "emdat/processed/emdat_all.parquet"
 
 
-def load_cerf_from_blob(
+def load_emdat_from_blob(
     iso3: str | None = None, stage: Literal["dev", "prod"] = "dev"
 ) -> pd.DataFrame:
     """
-    Load CERF funding data from Azure blob storage.
-
-    Retrieves CERF (Central Emergency Response Fund) data stored as a Parquet
-    file in Azure blob storage, with optional filtering by country ISO3 code.
-    Data downloaded from https://data.humdata.org/dataset/cerf-allocations and
-    manually transformed to parquet and uploaded to blob.
+    Load EM-DAT disaster data from Azure blob storage.
+    See here for a description of columns:
+    https://doc.emdat.be/docs/data-structure-and-content/emdat-public-table/#column-description
 
     Parameters
     ----------
@@ -33,22 +30,22 @@ def load_cerf_from_blob(
     Returns
     -------
     pd.DataFrame
-        DataFrame containing CERF funding data, optionally filtered by country.
+        DataFrame containing EM-DAT disaster data, optionally filtered by country.
     """
     iso3 = iso3.upper() if iso3 else iso3
     blob_client = get_container_client(
         container_name="global", stage=stage
-    ).get_blob_client(CERF_FNAME)
+    ).get_blob_client(EMDAT_FNAME)
     url = blob_client.url
 
     blob_properties = blob_client.get_blob_properties()
     last_modified = blob_properties.last_modified
-    logger.info(f"CERF data last updated: {last_modified}")
+    logger.info(f"EMDAT data last updated: {last_modified}")
 
     con = duckdb.connect()
     if iso3 is not None:
         df = con.execute(
-            f"SELECT * FROM read_parquet('{url}') WHERE countryCode = $1",
+            f"SELECT * FROM read_parquet('{url}') WHERE ISO = $1",
             [iso3],
         ).df()
     else:

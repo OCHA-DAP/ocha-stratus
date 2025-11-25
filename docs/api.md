@@ -75,3 +75,8 @@ Dataset-specific loading functions.
 ```{eval-rst}
 .. autofunction:: ocha_stratus.cerf.load_cerf_from_blob
 ```
+
+### EM-DAT disaster records
+```{eval-rst}
+.. autofunction:: ocha_stratus.emdat.load_emdat_from_blob
+```
