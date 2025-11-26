@@ -12,7 +12,9 @@ EMDAT_FNAME = "emdat/processed/emdat_all.parquet"
 
 
 def load_emdat_from_blob(
-    iso3: str | None = None, stage: Literal["dev", "prod"] = "dev"
+    iso3: str | None = None,
+    include_historic: bool = False,
+    stage: Literal["dev", "prod"] = "dev",
 ) -> pd.DataFrame:
     """
     Load EM-DAT disaster data from Azure blob storage.
@@ -24,6 +26,8 @@ def load_emdat_from_blob(
     iso3 : str or None, optional
         ISO3 country code to filter results. If None, returns all records.
         Default is None.
+    include_historic : bool, optional
+        Whether to include historic disaster data (pre-2000). Default is False.
     stage : Literal["dev", "prod"], optional
         Environment stage to load from, by default "dev"
 
@@ -43,11 +47,20 @@ def load_emdat_from_blob(
     logger.info(f"EMDAT data last updated: {last_modified}")
 
     con = duckdb.connect()
+
+    conditions = []
+    params = []
+
     if iso3 is not None:
-        df = con.execute(
-            f"SELECT * FROM read_parquet('{url}') WHERE ISO = $1",
-            [iso3],
-        ).df()
-    else:
-        df = con.execute(f"SELECT * FROM read_parquet('{url}')").df()
+        conditions.append(f"ISO = ${len(params) + 1}")
+        params.append(iso3)
+
+    if not include_historic:
+        conditions.append("Historic = 'No'")
+
+    query = f"SELECT * FROM read_parquet('{url}')"
+    if conditions:
+        query += " WHERE " + " AND ".join(conditions)
+
+    df = con.execute(query, params).df()
     return df
