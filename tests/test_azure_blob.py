@@ -95,6 +95,25 @@ def test_upload_parquet_to_blob(mock_container_client, sample_dataframe):
     mock_container_client.get_blob_client.return_value.upload_blob.assert_called_once()
 
 
+def test_upload_parquet_to_blob_geodataframe(
+    mock_container_client, sample_geodataframe
+):
+    """Test uploading a GeoDataFrame to blob storage in parquet format."""
+    from ocha_stratus.azure_blob import upload_parquet_to_blob
+
+    blob_name = "test_geo.parquet"
+    upload_parquet_to_blob(sample_geodataframe, blob_name, stage="dev")
+    mock_container_client.get_blob_client.assert_called_once_with(blob_name)
+    mock_container_client.get_blob_client.return_value.upload_blob.assert_called_once()
+
+    # Verify that bytes were passed to upload_blob
+    call_args = (
+        mock_container_client.get_blob_client.return_value.upload_blob.call_args
+    )
+    uploaded_data = call_args[0][0]
+    assert isinstance(uploaded_data, bytes)
+
+
 def test_load_parquet_from_blob(mock_container_client, sample_dataframe):
     """Test loading a parquet file from blob storage."""
     from ocha_stratus.azure_blob import load_parquet_from_blob

@@ -71,11 +71,12 @@ def upload_parquet_to_blob(
     **kwargs,
 ):
     """
-    Upload a pandas DataFrame to Azure Blob Storage in parquet format.
+    Upload a pandas DataFrame or GeoDataFrame to Azure Blob Storage
+    in parquet format.
 
     Parameters
     ----------
-    df : pandas.DataFrame
+    df : pandas.DataFrame or geopandas.GeoDataFrame
         DataFrame to upload
     blob_name : str
         Name of the blob to create/update
@@ -84,10 +85,17 @@ def upload_parquet_to_blob(
     container_name : str, optional
         Name of the container to upload to, by default "projects"
     **kwargs : dict
-        Additional arguments passed to pandas.DataFrame.to_parquet()
+        Additional arguments passed to DataFrame.to_parquet()
     """
+    if isinstance(df, gpd.GeoDataFrame):
+        buffer = io.BytesIO()
+        df.to_parquet(buffer, **kwargs)
+        data = buffer.getvalue()
+    else:
+        data = df.to_parquet(**kwargs)
+
     upload_blob_data(
-        df.to_parquet(**kwargs),
+        data,
         blob_name,
         stage=stage,
         container_name=container_name,
