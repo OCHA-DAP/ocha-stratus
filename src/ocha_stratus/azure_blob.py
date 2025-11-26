@@ -89,8 +89,11 @@ def upload_parquet_to_blob(
     """
     if isinstance(df, gpd.GeoDataFrame):
         buffer = io.BytesIO()
-        df.to_parquet(buffer, **kwargs)
-        data = buffer.getvalue()
+        try:
+            df.to_parquet(buffer, **kwargs)
+            data = buffer.getvalue()
+        finally:
+            buffer.close()
     else:
         data = df.to_parquet(**kwargs)
 
