@@ -16,6 +16,7 @@ from ocha_stratus.azure_blob import (
 from ocha_stratus.azure_database import get_engine, postgres_upsert
 from ocha_stratus.cogs import stack_cogs
 from ocha_stratus.datasources import cerf, codab, emdat
+from ocha_stratus.email import listmonk
 
 from ._version import version as __version__  # noqa: F401
 
@@ -43,4 +44,6 @@ __all__ = [
     "codab",
     "cerf",
     "emdat",
+    # Email
+    "listmonk",
 ]
