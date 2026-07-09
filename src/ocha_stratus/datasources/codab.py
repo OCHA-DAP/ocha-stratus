@@ -18,6 +18,8 @@ GEOPARQUET_URLS = {
     4: "https://data.fieldmaps.io/edge-matched/humanitarian/intl/adm4_polygons.parquet",
 }
 
+HDX_SOURCE_COOP_BASE_URL = "https://data.source.coop/hdx/cod-ab"
+
 
 def load_codab_from_fieldmaps(
     iso3: str,
@@ -51,6 +53,48 @@ def load_codab_from_fieldmaps(
     gdf = gpd.read_parquet(url, filters=filters, filesystem=filesystem)
     if len(gdf) == 0:
         logger.error(f"CODAB data for {iso3} not found")
+        return
+    return gdf
+
+
+def load_codab_from_hdx(
+    iso3: str,
+    admin_level: int = 0,
+    version: str = "latest",
+) -> gpd.GeoDataFrame:
+    """
+    Load COD-AB boundaries directly into memory from HDX's cloud-native mirror
+    of the official COD-AB ArcGIS services, hosted on Source Cooperative:
+    https://source.coop/hdx/cod-ab.
+
+    Parameters
+    ----------
+    iso3 : str
+        ISO 3166-1 alpha-3 country code
+    admin_level : int, optional
+        Administrative level, by default 0. Availability of higher levels
+        (up to 4) depends on the country.
+    version : str, optional
+        COD-AB version to load, e.g. "latest" or "v01", by default "latest"
+
+    Returns
+    -------
+    geopandas.GeoDataFrame
+        GeoDataFrame containing administrative boundaries for the specified country and level
+    """
+    iso3 = iso3.lower()
+    url = (
+        f"{HDX_SOURCE_COOP_BASE_URL}/{iso3}/{version}/"
+        f"adm{admin_level}/original.parquet"
+    )
+    filesystem = HTTPFileSystem()
+    try:
+        gdf = gpd.read_parquet(url, filesystem=filesystem)
+    except FileNotFoundError:
+        logger.error(
+            f"CODAB data for {iso3} at admin level {admin_level} "
+            f"(version {version}) not found"
+        )
         return
     return gdf
 
