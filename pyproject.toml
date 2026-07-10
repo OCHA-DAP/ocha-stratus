@@ -41,7 +41,8 @@ dependencies = [
     "tqdm>=4.67.1",
     "aiohttp>=3.12.15",
     "fsspec>=2025.5.1",
-    "duckdb>=1.4.0"
+    "duckdb>=1.4.0",
+    "requests>=2.32.0"
 ]
 dynamic = ["version"]
 
