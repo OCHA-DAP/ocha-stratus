@@ -18,10 +18,6 @@ GEOPARQUET_URLS = {
     4: "https://data.fieldmaps.io/edge-matched/humanitarian/intl/adm4_polygons.parquet",
 }
 
-# HDX reorganised the Source Cooperative mirror into a STAC catalog on
-# 2026-09-16. Files now live under the "original" collection at
-# <iso3>/<version>/<iso3>_admin<n>/<iso3>_admin<n>.parquet; the previous
-# <iso3>/<version>/adm<n>/original.parquet layout no longer exists.
 HDX_SOURCE_COOP_BASE_URL = "https://data.source.coop/hdx/cod-ab/original"
 
 
