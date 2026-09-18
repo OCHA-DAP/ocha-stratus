@@ -18,7 +18,7 @@ GEOPARQUET_URLS = {
     4: "https://data.fieldmaps.io/edge-matched/humanitarian/intl/adm4_polygons.parquet",
 }
 
-HDX_SOURCE_COOP_BASE_URL = "https://data.source.coop/hdx/cod-ab"
+HDX_SOURCE_COOP_BASE_URL = "https://data.source.coop/hdx/cod-ab/original"
 
 
 def load_codab_from_fieldmaps(
@@ -83,10 +83,8 @@ def load_codab_from_hdx(
         GeoDataFrame containing administrative boundaries for the specified country and level
     """
     iso3 = iso3.lower()
-    url = (
-        f"{HDX_SOURCE_COOP_BASE_URL}/{iso3}/{version}/"
-        f"adm{admin_level}/original.parquet"
-    )
+    layer = f"{iso3}_admin{admin_level}"
+    url = f"{HDX_SOURCE_COOP_BASE_URL}/{iso3}/{version}/{layer}/{layer}.parquet"
     filesystem = HTTPFileSystem()
     try:
         gdf = gpd.read_parquet(url, filesystem=filesystem)
